@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func Generate(filename, pkg, prefix string, content *string) ([]byte, error) {
+func Generate(filename, pkg, prefix string, content *[]byte) ([]byte, error) {
 	tmplData := struct {
 		Filename string
 		Pkg      string
@@ -18,7 +18,7 @@ func Generate(filename, pkg, prefix string, content *string) ([]byte, error) {
 		Filename: strings.Join(os.Args[1:], " "),
 		Pkg:      pkg,
 		Prefix:   prefix,
-		Content:  *content,
+		Content:  string(*content),
 		Raw:      "`",
 	}
 
