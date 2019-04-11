@@ -45,10 +45,10 @@ func init() {
   }
 }
 
-func {{.Prefix}}Content() []byte    { return file{{.Prefix}}.Content() }
-func {{.Prefix}}Name() string       { return file{{.Prefix}}.Name() }
-func {{.Prefix}}Comment() string    { return file{{.Prefix}}.Comment() }
-func {{.Prefix}}ModTime() time.Time { return file{{.Prefix}}.ModTime() }
+func {{.Prefix}}Content() *[]byte    { return file{{.Prefix}}.Content() }
+func {{.Prefix}}Name() *string       { return file{{.Prefix}}.Name() }
+func {{.Prefix}}Comment() *string    { return file{{.Prefix}}.Comment() }
+func {{.Prefix}}ModTime() *time.Time { return file{{.Prefix}}.ModTime() }
 
 // eof
 `)

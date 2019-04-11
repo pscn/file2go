@@ -34,17 +34,17 @@ func TestEncodeDecode(t *testing.T) {
 			t.Fatalf("failed to encode bytes: %s", err)
 		}
 		decoded, err := decode.Init(string(*encoded))
-		if string(decoded.Content()) != string(m.content) {
+		if string(*decoded.Content()) != string(m.content) {
 			t.Fatalf("failed to decode content: have %s want %s",
-				decoded.Content(), m.content)
+				*decoded.Content(), m.content)
 		}
-		if decoded.Name() != m.name {
+		if *decoded.Name() != m.name {
 			t.Fatalf("failed to decode name: have %s want %s",
-				decoded.Name(), m.name)
+				*decoded.Name(), m.name)
 		}
-		if decoded.Comment() != m.comment {
+		if *decoded.Comment() != m.comment {
 			t.Fatalf("failed to decode comment: have %s want %s",
-				decoded.Comment(), m.comment)
+				*decoded.Comment(), m.comment)
 		}
 		if decoded.ModTime().UTC() != now {
 			t.Fatalf("failed to decode modTime: have %s want %s",

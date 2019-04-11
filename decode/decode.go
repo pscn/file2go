@@ -11,29 +11,29 @@ import (
 
 // File stores name, content, comment and modTime of the decoded string
 type File struct {
-	content []byte
-	comment string
-	name    string
-	modTime time.Time
+	content *[]byte
+	comment *string
+	name    *string
+	modTime *time.Time
 }
 
 // Content of the *File
-func (f *File) Content() []byte {
+func (f *File) Content() *[]byte {
 	return f.content
 }
 
 // Comment for the *File
-func (f *File) Comment() string {
+func (f *File) Comment() *string {
 	return f.comment
 }
 
 // Name of the *File
-func (f *File) Name() string {
+func (f *File) Name() *string {
 	return f.name
 }
 
 // ModTime of the *File
-func (f *File) ModTime() time.Time {
+func (f *File) ModTime() *time.Time {
 	return f.modTime
 }
 
@@ -74,18 +74,20 @@ func Init(base64Encoded string) (*File, error) {
 	if err != nil {
 		return nil, err
 	}
-	name, err := base64.StdEncoding.DecodeString(zr.Name)
+	bName, err := base64.StdEncoding.DecodeString(zr.Name)
 	if err != nil {
 		return nil, err
 	}
-	comment, err := base64.StdEncoding.DecodeString(zr.Comment)
+	name := string(bName)
+	bComment, err := base64.StdEncoding.DecodeString(zr.Comment)
 	if err != nil {
 		return nil, err
 	}
+	comment := string(bComment)
 	return &File{
-		content: c,
-		name:    string(name),
-		comment: string(comment),
-		modTime: zr.ModTime,
+		content: &c,
+		name:    &name,
+		comment: &comment,
+		modTime: &zr.ModTime,
 	}, nil
 }
