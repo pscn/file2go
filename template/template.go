@@ -2,9 +2,9 @@ package template
 
 import (
 	"fmt"
-	"html/template"
 	"os"
 	"strings"
+	"text/template"
 )
 
 func Generate(filename, pkg, prefix string, content *[]byte) ([]byte, error) {
