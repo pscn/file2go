@@ -17,7 +17,7 @@ Finally call:
 go generate
 ````
 
-This will generate a file ````templates/index.go```` that contains ````templates.index.html````.  To get the content use ````templates.IndexContent()````.
+This will generate a file ````templates/index.go```` that contains ````templates/index.html````.  To get the content use ````templates.IndexContent()````.
 
 Content is GZIPed and BASE64 encoded.
 
