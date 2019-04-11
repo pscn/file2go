@@ -3,17 +3,20 @@
 DO NOT USE!
 
 If you still want to use it, you could try:
-````
+
+````shell
 go get github.com/pscn/file2go
 ````
 
 And add something like this to your go file:
-````
+
+````shell
 //go:generate file2go -verbose -prefix Index templates/index.html
 ````
 
 Finally call:
-````
+
+````shell
 go generate
 ````
 
