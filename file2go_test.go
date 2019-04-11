@@ -33,7 +33,7 @@ func TestEncodeDecode(t *testing.T) {
 		if err != nil {
 			t.Fatalf("failed to encode bytes: %s", err)
 		}
-		decoded, err := decode.Init(encoded)
+		decoded, err := decode.Init(string(*encoded))
 		if string(decoded.Content()) != string(m.content) {
 			t.Fatalf("failed to decode content: have %s want %s",
 				decoded.Content(), m.content)

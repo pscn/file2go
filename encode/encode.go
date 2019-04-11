@@ -13,15 +13,15 @@ import (
 
 // File GZIPs the file given by filename as string, embeing the base of
 // filename as name and the comment
-func File(filename string, comment string) (string, error) {
+func File(filename string, comment string) (*[]byte, error) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
-		return "", fmt.Errorf("failed to read file: filename=%s; error=%s",
+		return nil, fmt.Errorf("failed to read file: filename=%s; error=%s",
 			filename, err)
 	}
 	stat, err := os.Stat(filename)
 	if err != nil {
-		return "", fmt.Errorf("failed to get stat from file: filename=%s; error=%s",
+		return nil, fmt.Errorf("failed to get stat from file: filename=%s; error=%s",
 			filename, err)
 	}
 	return Bytes(&data, path.Base(filename), comment, stat.ModTime())
@@ -29,7 +29,7 @@ func File(filename string, comment string) (string, error) {
 
 // Bytes GZIPs the []bytes and returns a BASE64 encoded string, embeding
 // name and comment
-func Bytes(data *[]byte, name string, comment string, modTime time.Time) (string, error) {
+func Bytes(data *[]byte, name string, comment string, modTime time.Time) (*[]byte, error) {
 	var buf bytes.Buffer
 	zw := gzip.NewWriter(&buf)
 	// only Latin in GZIP headers
@@ -38,14 +38,15 @@ func Bytes(data *[]byte, name string, comment string, modTime time.Time) (string
 	zw.ModTime = modTime
 	_, err := zw.Write(*data)
 	if err != nil {
-		return "", fmt.Errorf("failed to compress data: name=%s; error=%s",
+		return nil, fmt.Errorf("failed to compress data: name=%s; error=%s",
 			name, err)
 	}
 
 	// do not defer! otherwise the base64 encode will not see anything
 	err = zw.Close()
 	if err != nil {
-		return "", fmt.Errorf("failed to close GZIP writer: error=%s", err)
+		return nil, fmt.Errorf("failed to close GZIP writer: error=%s", err)
 	}
-	return base64.StdEncoding.EncodeToString(buf.Bytes()), nil
+	result := []byte(base64.StdEncoding.EncodeToString(buf.Bytes()))
+	return &result, nil
 }
