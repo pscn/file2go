@@ -57,7 +57,7 @@ func init() {
   var err error
   
   container["template/files.tmpl"], err = decode(`` +
-    `H4sICFK1sFwA/1ptbHNaWE11ZEcxd2JBPT0ArFRRa+Q2EH62fsXUcMEOiw0lXGGPfc` +
+    `H4sICLq1sFwA/1ptbHNaWE11ZEcxd2JBPT0ArFRRa+Q2EH62fsXUcMEOiw0lXGGPfc` +
     `htlpKHyx1NoNCwFK09csTakpHlHlmj1/6A/sT+kjKy7Nvb7D005CVZa6Rvvvnmm8lz` +
     `WOsSoUKFhlssYfcMsZA1/lxpGIbs2lR9g8p2zsUf4OYz3H1+gM3N7UPGWJ7DRhW6xB` +
     `LoRbdkw2C4qhCytVaWS4XGuTyHf//+h7DueIPOsWFAVTrHWl7seYUU+bKvnGNMNq02` +
