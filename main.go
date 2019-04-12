@@ -17,6 +17,7 @@ var (
 	prefix = flag.String("prefix", "", "the prefix to use for the methods")
 	pkg    = flag.String("pkg", "",
 		"package name to use, defaults to the base directory of the file")
+	comment = flag.String("comment", "", "sets a comment for the encoded file")
 	verbose = flag.Bool("verbose", false, "be more verbose")
 )
 
@@ -62,7 +63,7 @@ func main() {
 		log.Printf("converting: %s => %s\n", filename, target)
 	}
 
-	encoded, err := encode.File(filename, "encoded by file2go")
+	encoded, err := encode.File(filename, *comment)
 	if err != nil {
 		log.Fatalf("failed to encode file: filename=%s, error=%s", filename, err)
 	}
