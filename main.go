@@ -74,7 +74,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("failed to read old file: %s; error=%s", target, err)
 		}
-		if string(data) == string(tmpl) {
+		if string(data) == string(*tmpl) {
 			if *verbose {
 				log.Printf("already up to date: %s", target)
 			}
@@ -86,7 +86,7 @@ func main() {
 		log.Fatalf("failed to open file: %s\n", err)
 	}
 	defer file.Close()
-	_, err = file.Write(tmpl)
+	_, err = file.Write(*tmpl)
 	if err != nil {
 		log.Fatalf("failed to write code to file: %s; error=%s", target, err)
 	}
