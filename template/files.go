@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// file stores name, content and modTime of the decoded string
+// file stores the content and modTime of the decoded string
 type file struct {
 	content *[]byte
 	modTime *time.Time
@@ -24,7 +24,7 @@ var container map[string]*file
 
 // Init populates *file with data decoded from base64Encoded string
 func decode(base64Encoded string) (*file, error) {
-	gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
+  gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(BASE64): %s", err)
 	}
@@ -41,7 +41,7 @@ func decode(base64Encoded string) (*file, error) {
 	}
 	defer zr.Close()
 
-	decoded, err := ioutil.ReadAll(zr)
+  decoded, err := ioutil.ReadAll(zr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(GZIP): %s", err)
 	}
@@ -53,37 +53,37 @@ func decode(base64Encoded string) (*file, error) {
 }
 
 func init() {
-	container = make(map[string]*file)
-	var err error
-
-	container["template/files.tmpl"], err = decode(`` +
-		`H4sICCmRsFwA/1ptbHNaWE11ZEcxd2JBPT0ArFTdauNGFL7WPMWpYIMUjAQlbMGLL7` +
-		`KOKbnY7NIECg2mjKUzymBpRoxGXWIxt32APmKfpJzRSOt1vBcNubE1f9/5zne+c/Ic` +
-		`1rpEqFCh4RZL2D1DLGSNP1cahiG7NlXfoLKdc/EHuPkMd58fYHNz+5AxluewUYUusQ` +
-		`R60S3ZMBiuKoRsrZXlUqFxLs/h37//Iaw73qBzbBhQlc6xlhd7XiGdfNlXzjEmm1Yb` +
-		`CwmL4t2zxS5mUVzopjXYdXl1kC1tIIWUqsp3vMP3V7QlGkt/UudS91bWtLCywZilni` +
-		`Wxg85qgx0o3uACCq0sKgtcldDo8kE2CFqAfUIocUyps0aqitnnFicA0xcWBhZNry8f` +
-		`t8STRRPEJUXN6JM5xv7ixgfyQkDD28cRc3tJeJ7ZrZIWWt32NbfYgT+Ar9I+Qcktn7` +
-		`kIoxsY850UD/REr4pwLTl3IYXEgy4AjdEmhYEBkJThmt+H5SqgZ/e23ASBsxsPe+9x` +
-		`vgdPWSSFf/nTCpSsSZTIoO2NouUCRGOzDQUUSSy4rLEEqwNPn1ry8fp+8/4qXcK7Lv` +
-		`YkUhY5xiISbdcL8AbIPvZCoGHRnyPPFR1lvxtpMTlK4jV0dh75mNILKgczq0PBsjv8` +
-		`+hvyEk1ysevFKzUoDHKLYDxQKKynchI+KpH4HUy2rnWHScoYTH6YaY12z4jVdV0nB/` +
-		`MGhfn1j9svL8sSMC7IS4QZWmAJFxMnFk1tsISLg8k+jYsFi9yCYlNHeLdKJW0yGvFb` +
-		`d6yg4XtMTpskZQDkCMrIG5gBDAO8nDLHYI/xPGzi7WSc0CPThErWT73ajxDUyr9cpc` +
-		`4NQ0Y/fjxR5FMpAaKWK1kkXhcANwyAqgTn5uQCXkLkadQcteE4LL5rRClgbE69p3J+` +
-		`y2B6vv1AR3QVIJSAjrIg/ygsAKX/wyqHYf6uA6UtCN2rMl7AFCE9pf6p787QD+yPpt` +
-		`9swtOUz3rwSDcydyAboGYKwTPn1Jsn69sIGKz6pgIG9j8QcE6A9JjDBw1PE/8fGgYo` +
-		`YpHngFr8FwAA///9W6tM1AcAAA==`)
-	if err != nil {
-		panic(err)
-	}
+  container = make(map[string]*file)
+  var err error
+  
+  container["template/files.tmpl"], err = decode(`` +
+    `H4sICFK1sFwA/1ptbHNaWE11ZEcxd2JBPT0ArFRRa+Q2EH62fsXUcMEOiw0lXGGPfc` +
+    `htlpKHyx1NoNCwFK09csTakpHlHlmj1/6A/sT+kjKy7Nvb7D005CVZa6Rvvvnmm8lz` +
+    `WOsSoUKFhlssYfcMsZA1/lxpGIbs2lR9g8p2zsUf4OYz3H1+gM3N7UPGWJ7DRhW6xB` +
+    `LoRbdkw2C4qhCytVaWS4XGuTyHf//+h7DueIPOsWFAVTrHWl7seYUU+bKvnGNMNq02` +
+    `FhIWxbtni13MorjQTWuw6/LqIFs6QEopVZXveIfvr+hINJb+SZ1L3VtZ04eVDcYs9S` +
+    `yJHXRWG+zAPiEUWllUFrgqodHlg2wQtPChEseCOmukqph9bnF6bvrCwsCi6fXl45ZY` +
+    `smiCuKScGf1kjrG/uPGJvAzQ8PZxxNxeEp7ndaukhVa3fc0tduAD8FXaJyi55TMXYX` +
+    `QDY7WT3oGe6FURriXnLqSQeNAFoDHapDAwABIyXPPnsFwF9Ozelpsgb3bjYe89zvfg` +
+    `KYuk8C9/WoGSNYkSGbS9UfS5ANHYbEMJRRILLmsswerA05eWfLy+37y/Spfwros9iZ` +
+    `RFjrGIRNv1Anz7s4+9EGhY9OfIc0Wh7HcjLSZHRbyGzs4jH1N6QeVgZnUoWXaHX39D` +
+    `XqJJLna9eKUGhUFuEYwHCo31VE7SRyUSv4PJ1rXuMEkZg8kPM63R7Bmxuq7r5GDeoD` +
+    `G//nH75WVbAsYFeYkwwwgs4WLixKJpDJZwcTDZp/FjwSK3oNw0Ed6tUkmbjEb8Nh0r` +
+    `aPgek9MhSRkAOYIq8gZmAMMAL3fMMdhjPK+aeDsZJ8zItJ+S9VOv9iMEjfIvV6lzw5` +
+    `DRH7+cKPOplABRy5UsEq8LgBsGQFWCc3NxAS8h8oo3eDSG47L4bhClgHE49Z7a+a2C` +
+    `6fn2A4XoKkBoAYWyIP8oLACV/8Muh1X+rgOlLQjdqzJewJQhPaX+qe/O0A/sj7bfbM` +
+    `LTks968Eg3MncgG6BmCsEz59SbN+vbCBis+qYCBvY/EHAugPSY0wcNTwv/HxoGKGKR` +
+    `54Ba/BcAAP//O8qa8NIHAAA=`)
+  if err != nil {
+  	panic(err)
+  }
 }
 
 func Content(filename string) (*[]byte, error) {
-	if file, ok := container[filename]; ok {
-		return file.content, nil
-	}
-	return nil, fmt.Errorf("file2go %s not found", filename)
+  if file, ok := container[filename]; ok {
+    return file.content, nil
+  }
+  return nil, fmt.Errorf("file2go %s not found", filename)
 }
 
 func ContentMust(filename string) *[]byte {
@@ -95,10 +95,10 @@ func ContentMust(filename string) *[]byte {
 }
 
 func ModTime(filename string) (*time.Time, error) {
-	if file, ok := container[filename]; ok {
-		return file.modTime, nil
-	}
-	return nil, fmt.Errorf("file2go %s not found", filename)
+  if file, ok := container[filename]; ok {
+    return file.modTime, nil
+  }
+  return nil, fmt.Errorf("file2go %s not found", filename)
 }
 
 func ModTimeMust(filename string) *time.Time {
