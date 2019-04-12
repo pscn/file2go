@@ -2,7 +2,6 @@ package template
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"text/template"
 )
@@ -15,7 +14,7 @@ func Generate(filename, pkg, prefix string, content *[]byte) ([]byte, error) {
 		Content  string
 		Raw      string
 	}{
-		Filename: strings.Join(os.Args[1:], " "),
+		Filename: filename,
 		Pkg:      pkg,
 		Prefix:   prefix,
 		Content:  string(*content),
