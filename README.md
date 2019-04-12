@@ -1,4 +1,4 @@
-# Experimental library to convert arbitrary files to gocode
+## Experimental library to convert arbitrary files to gocode
 
 DO NOT USE!
 
@@ -59,3 +59,7 @@ func IndexModTime() *time.Time { return fileIndex.ModTime() }
 Content is GZIPed and BASE64 encoded.
 
 This is likely to change without further notice so => DO NOT USE ;)
+
+### Better Alternatives
+
+[https://github.com/a-urth/go-bindata](https://github.com/a-urth/go-bindata) might provide a more production ready approach?

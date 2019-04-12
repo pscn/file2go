@@ -12,8 +12,8 @@ import (
 )
 
 // File GZIPs the file given by filename as string, embeing the base of
-// filename as name and the comment
-func File(filename string, comment string) (*[]byte, error) {
+// filename as name
+func File(filename string) (*[]byte, error) {
 	data, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read file: filename=%s; error=%s",
@@ -24,17 +24,16 @@ func File(filename string, comment string) (*[]byte, error) {
 		return nil, fmt.Errorf("failed to get stat from file: filename=%s; error=%s",
 			filename, err)
 	}
-	return Bytes(&data, path.Base(filename), comment, stat.ModTime())
+	return Bytes(&data, path.Base(filename), stat.ModTime())
 }
 
 // Bytes GZIPs the []bytes and returns a BASE64 encoded string, embeding
-// name and comment
-func Bytes(data *[]byte, name string, comment string, modTime time.Time) (*[]byte, error) {
+// and name
+func Bytes(data *[]byte, name string, modTime time.Time) (*[]byte, error) {
 	var buf bytes.Buffer
 	zw := gzip.NewWriter(&buf)
 	// only Latin in GZIP headers
 	zw.Name = base64.StdEncoding.EncodeToString([]byte(name))
-	zw.Comment = base64.StdEncoding.EncodeToString([]byte(comment))
 	zw.ModTime = modTime
 	_, err := zw.Write(*data)
 	if err != nil {

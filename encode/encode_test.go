@@ -3,24 +3,20 @@ package encode
 import (
 	"testing"
 	"time"
-
-	"github.com/pscn/file2go.old/encode"
 )
 
-func TestDecode(t *testing.T) {
+func TestEncode(t *testing.T) {
 	for _, m := range []struct {
 		content []byte
 		name    string
-		comment string
 		date    string
 		encoded string
 	}{
 		{
 			[]byte("Hello World\n"),
 			"hello_world.txt",
-			"encoded by file2go",
 			"2019-04-12T04:24:00Z",
-			`H4sIGOASsFwA/2FHVnNiRzlmZDI5eWJHUXVkSGgwAFpXNWpiMlJsWkNCaWVTQm1hV3hsTW1kdgDySM3JyVcIzy/KSeECBAAA///j5ZWwDAAAAA==`,
+			`H4sICOASsFwA/2FHVnNiRzlmZDI5eWJHUXVkSGgwAPJIzcnJVwjPL8pJ4QIEAAD//+PllbAMAAAA`,
 		},
 	} {
 		// Mon Jan 2 15:04:05 -0700 MST 2006
@@ -28,7 +24,7 @@ func TestDecode(t *testing.T) {
 		if err != nil {
 			t.Fatalf("test setup failed to parse date: %s; error=%s", m.date, err)
 		}
-		encoded, err := encode.Bytes(&m.content, m.name, m.comment, now)
+		encoded, err := Bytes(&m.content, m.name, now)
 		if err != nil {
 			t.Fatalf("failed to encode bytes: %s", err)
 		}
