@@ -13,7 +13,8 @@ func TestDecode(t *testing.T) {
 		comment string
 		date    string
 	}{
-		{`H4sIGOASsFwA/2FHVnNiRzlmZDI5eWJHUXVkSGgwAFpXNWpiMlJsWkNCaWVTQm1hV3hsTW1kdgDySM3JyVcIzy/KSeECBAAA///j5ZWwDAAAAA==`,
+		{
+			`H4sIGOASsFwA/2FHVnNiRzlmZDI5eWJHUXVkSGgwAFpXNWpiMlJsWkNCaWVTQm1hV3hsTW1kdgDySM3JyVcIzy/KSeECBAAA///j5ZWwDAAAAA==`,
 			[]byte("Hello World\n"),
 			"hello_world.txt",
 			"encoded by file2go",
