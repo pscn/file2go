@@ -6,7 +6,7 @@ import (
 	"text/template"
 )
 
-func Generate(filename, pkg, prefix string, content *[]byte) ([]byte, error) {
+func Generate(filename, pkg, prefix string, content *[]byte) (*[]byte, error) {
 	tmplData := struct {
 		Filename string
 		Pkg      string
@@ -59,5 +59,6 @@ func {{.Prefix}}ModTime() *time.Time { return file{{.Prefix}}.ModTime() }
 	if err != nil {
 		return nil, fmt.Errorf("failed to execute template: error=%s", err)
 	}
-	return []byte(b.String()), nil
+	result := []byte(b.String())
+	return &result, nil
 }
