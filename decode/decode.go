@@ -18,24 +18,16 @@ type File struct {
 }
 
 // Content of the *File
-func (f *File) Content() *[]byte {
-	return f.content
-}
+func (f *File) Content() *[]byte { return f.content }
 
 // Comment for the *File
-func (f *File) Comment() *string {
-	return f.comment
-}
+func (f *File) Comment() *string { return f.comment }
 
 // Name of the *File
-func (f *File) Name() *string {
-	return f.name
-}
+func (f *File) Name() *string { return f.name }
 
 // ModTime of the *File
-func (f *File) ModTime() *time.Time {
-	return f.modTime
-}
+func (f *File) ModTime() *time.Time { return f.modTime }
 
 func gzipReader(base64Encoded *string) (*gzip.Reader, error) {
 	gzipEncoded, err := base64.StdEncoding.DecodeString(*base64Encoded)
@@ -54,13 +46,13 @@ func gzipReader(base64Encoded *string) (*gzip.Reader, error) {
 	return zr, nil
 }
 
-// Content decodes the BASE64 encoded GZIP encoded data from string to string
-func content(zr *gzip.Reader) ([]byte, error) {
+// content reads and returns the GZIP decoded content from the reader
+func content(zr *gzip.Reader) (*[]byte, error) {
 	decoded, err := ioutil.ReadAll(zr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(GZIP): %s", err)
 	}
-	return decoded, nil
+	return &decoded, nil
 }
 
 // Init populates *File with data decoded from base64Encoded string
@@ -85,7 +77,7 @@ func Init(base64Encoded string) (*File, error) {
 	}
 	comment := string(bComment)
 	return &File{
-		content: &c,
+		content: c,
 		name:    &name,
 		comment: &comment,
 		modTime: &zr.ModTime,
