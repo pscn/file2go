@@ -46,7 +46,7 @@ func main() {
 		os.Exit(2)
 	}
 	if *prefix == "" {
-		Usage("please specify an prefix")
+		Usage("please specify a prefix")
 		os.Exit(2)
 	}
 	filename := flag.Args()[0]
