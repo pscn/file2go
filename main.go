@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/pscn/file2go/encode"
 	"github.com/pscn/file2go/template"
@@ -65,7 +66,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to encode file: filename=%s, error=%s", filename, err)
 	}
-	tmpl, err := template.Generate(filename, *pkg, *prefix, encoded)
+	tmpl, err := template.Generate(strings.Join(os.Args[1:], " "), *pkg, *prefix, encoded)
 	if err != nil {
 		log.Fatalf("failed to generate code: %s\n", err)
 	}
