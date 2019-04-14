@@ -6,7 +6,6 @@ import (
 	"math"
 	"strings"
 	"text/template"
-	"time"
 )
 
 // File keeping the name & the content
@@ -34,28 +33,26 @@ func chunk(src *[]byte, chunksize int) *[]string {
 	return &result
 }
 
-// Execute returns a go code template FIXME:
-func Execute(container *[]File, arguments, pkg string, devel bool) (*[]byte, error) {
+// Parse returns a go code template FIXME:
+func Parse(tmplName string, container *[]File, arguments, pkg string, devel bool) (*[]byte, error) {
 	tmplData := struct {
 		Arguments string
 		Pkg       string
 		Container []File
-		Date      string
 	}{
 		Arguments: arguments,
 		Pkg:       pkg,
 		Container: *container,
-		Date:      time.Now().String(),
 	}
 	tmplStr := ""
 	if devel {
-		tmplFromFile, err := ioutil.ReadFile("template/files.tmpl")
+		tmplFromFile, err := ioutil.ReadFile(tmplName)
 		if err != nil {
 			return nil, err
 		}
 		tmplStr = string(tmplFromFile)
 	} else {
-		dataFromGo, err := Content("template/files.tmpl")
+		dataFromGo, err := Content(tmplName)
 		if err != nil {
 			return nil, err
 		}
@@ -76,3 +73,5 @@ func Execute(container *[]File, arguments, pkg string, devel bool) (*[]byte, err
 	result := []byte(b.String())
 	return &result, nil
 }
+
+// eof

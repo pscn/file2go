@@ -11,20 +11,13 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"time"
 )
 
-// file stores the content and modTime of the decoded string
-type file struct {
-	content *[]byte
-	modTime *time.Time
-}
+var container map[string]*[]byte
 
-var container map[string]*file
-
-// Init populates *file with data decoded from base64Encoded string
-func decode(base64Encoded string) (*file, error) {
-  gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
+// decode the base64Encoded string and return a *[]byte for the decoded data
+func decode(base64Encoded string) (*[]byte, error) {
+	gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(BASE64): %s", err)
 	}
@@ -41,55 +34,39 @@ func decode(base64Encoded string) (*file, error) {
 	}
 	defer zr.Close()
 
-  decoded, err := ioutil.ReadAll(zr)
+	decoded, err := ioutil.ReadAll(zr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(GZIP): %s", err)
 	}
 
-	return &file{
-		content: &decoded,
-		modTime: &zr.ModTime,
-	}, nil
+	return &decoded, nil
 }
 
 func init() {
-  container = make(map[string]*file)
-  var err error
-  {{ range .Container}}
-  container["{{.Name}}"], err = decode({{range (Chunk .Content 74)}}{{.}}{{end}})
-  if err != nil {
-  	panic(err)
-  }{{ end }}
+	container = make(map[string]*[]byte)
+	var err error
+	{{ range .Container}}
+	container["{{.Name}}"], err = decode({{range (Chunk .Content 74)}}{{.}}{{end}})
+	if err != nil {
+		panic(err)
+	}{{ end }}
 }
 
+// Content for the given filename
 func Content(filename string) (*[]byte, error) {
-  if file, ok := container[filename]; ok {
-    return file.content, nil
-  }
-  return nil, fmt.Errorf("file2go %s not found", filename)
+	if content, ok := container[filename]; ok {
+		return content, nil
+	}
+	return nil, fmt.Errorf("file2go %s not found", filename)
 }
 
+// ContentMust for the given filename, panics if filename not found
 func ContentMust(filename string) *[]byte {
 	content, err := Content(filename)
 	if err != nil {
 		panic(err)
 	}
 	return content
-}
-
-func ModTime(filename string) (*time.Time, error) {
-  if file, ok := container[filename]; ok {
-    return file.modTime, nil
-  }
-  return nil, fmt.Errorf("file2go %s not found", filename)
-}
-
-func ModTimeMust(filename string) *time.Time {
-	modTime, err := ModTime(filename)
-	if err != nil {
-		panic(err)
-	}
-	return modTime
 }
 
 // eof
