@@ -18,7 +18,7 @@ func TestContentDoesNotExist(t *testing.T) {
 }
 
 func TestContentExists(t *testing.T) {
-	var err error
+  var err error
 	_, err = Content("template\files.tmpl")
 	if err != nil {
 		t.Fatalf("Content \"template\files.tmpl\" not found: %s", err)
