@@ -34,8 +34,8 @@ func chunk(src *[]byte, chunksize int) *[]string {
 	return &result
 }
 
-// Execute returns a go code template FIXME:
-func Execute(container *[]File, arguments, pkg string, devel bool) (*[]byte, error) {
+// Parse returns a go code template FIXME:
+func Parse(container *[]File, arguments, pkg string, devel bool) (*[]byte, error) {
 	tmplData := struct {
 		Arguments string
 		Pkg       string
@@ -64,6 +64,47 @@ func Execute(container *[]File, arguments, pkg string, devel bool) (*[]byte, err
 	tmpl, err := template.New("").Funcs(template.FuncMap{
 		"Chunk": func(src *[]byte, cs int) *[]string { return chunk(src, cs) },
 	}).Parse(tmplStr)
+
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse internal template: error=%s", err)
+	}
+	var b strings.Builder
+	err = tmpl.Execute(&b, tmplData)
+	if err != nil {
+		return nil, fmt.Errorf("failed to execute template: error=%s", err)
+	}
+	result := []byte(b.String())
+	return &result, nil
+}
+
+// ParseTest returns a go code template FIXME:
+func ParseTest(container *[]File, arguments, pkg string, devel bool) (*[]byte, error) {
+	tmplData := struct {
+		Arguments string
+		Pkg       string
+		Container []File
+		Date      string
+	}{
+		Arguments: arguments,
+		Pkg:       pkg,
+		Container: *container,
+		Date:      time.Now().String(),
+	}
+	tmplStr := ""
+	if devel {
+		tmplFromFile, err := ioutil.ReadFile("template/files_test.tmpl")
+		if err != nil {
+			return nil, err
+		}
+		tmplStr = string(tmplFromFile)
+	} else {
+		dataFromGo, err := Content("template/files_test.tmpl")
+		if err != nil {
+			return nil, err
+		}
+		tmplStr = string(*dataFromGo)
+	}
+	tmpl, err := template.New("").Parse(tmplStr)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse internal template: error=%s", err)

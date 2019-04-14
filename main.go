@@ -13,8 +13,11 @@ import (
 	"github.com/pscn/file2go/template"
 )
 
+//go:generate file2go -verbose -output template/files.go template/files.tmpl template/files_test.tmpl
+
 var (
 	output = flag.String("output", "", "the target file name")
+	test   = flag.Bool("test", true, "create a test file too")
 	pkg    = flag.String("pkg", "",
 		"package name to use, defaults to the base directory of target")
 	verbose = flag.Bool("verbose", false, "be more verbose")
@@ -65,7 +68,7 @@ func main() {
 		}
 	}
 
-	tmpl, err := template.Execute(&container, strings.Join(os.Args[1:], " "),
+	tmpl, err := template.Parse(&container, strings.Join(os.Args[1:], " "),
 		*pkg, *devel)
 	if err != nil {
 		log.Fatalf("failed to generate code: %s\n", err)
