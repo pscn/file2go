@@ -32,7 +32,6 @@ func Bytes(data *[]byte, name string) (*[]byte, error) {
 		return nil, fmt.Errorf("failed to compress data: name=%s; error=%s",
 			name, err)
 	}
-
 	// do not defer! otherwise the base64 encode will not see anything
 	err = zw.Close()
 	if err != nil {
