@@ -58,23 +58,23 @@ func init() {
   var err error
   
   container["template/files.tmpl"], err = decode(`` +
-    `H4sICPK2sFwA/1ptbHNaWE11ZEcxd2JBPT0ArFRRa+Q2EH62fsXUcMEOiw0lXGGPfc` +
-    `htlpKHyx1NoNCwFK09csTakpHlHlmj1/6A/sT+kjKy7Nvb7D005CVZa6Rvvvnmm8lz` +
-    `WOsSoUKFhlssYfcMsZA1/lxpGIbs2lR9g8p2zsUf4OYz3H1+gM3N7UPGWJ7DRhW6xB` +
-    `LoRbdkw2C4qhCytVaWS4XGuTyHf//+h7DueIPOsWFAVTrHWl7seYUU+bKvnGNMNq02` +
-    `FhIWxbtni13MorjQTWuw6/LqIFs6QEopVZXveIfvr+hINJb+SZ1L3VtZ04eVDcYs9S` +
-    `yJHXRWG+zAPiEUWllUFrgqodHlg2wQtPChEseCOmukqph9bnF6bvrCwsCi6fXl45ZY` +
-    `smiCuKScGf1kjrG/uPGJvAzQ8PZxxNxeEp7ndaukhVa3fc0tduAD8FXaJyi55TMXYX` +
-    `QDY7WT3oGe6FURriXnLqSQeNAFoDHapDAwABIyXPPnsFwF9Ozelpsgb3bjYe89zvfg` +
-    `KYuk8C9/WoGSNYkSGbS9UfS5ANHYbEMJRRILLmsswerA05eWfLy+37y/Spfwros9iZ` +
-    `RFjrGIRNv1Anz7s4+9EGhY9OfIc0Wh7HcjLSZHRbyGzs4jH1N6QeVgZnUoWXaHX39D` +
-    `XqJJLna9eKUGhUFuEYwHCo31VE7SRyUSv4PJ1rXuMEkZg8kPM63R7Bmxuq7r5GDeoD` +
-    `G//nH75WVbAsYFeYkwwwgs4WLixKJpDJZwcTDZp/FjwSK3oNw0Ed6tUkmbjEb8Nh0r` +
-    `aPgek9MhSRkAOYIq8gZmAMMAL3fMMdhjPK+aeDsZJ8zItJ+S9VOv9iMEjfIvV6lzw5` +
-    `DRH7+cKPOplABRy5UsEq8LgBsGQFWCc3NxAS8h8oo3eDSG47L4bhClgHE49Z7a+a2C` +
-    `6fn2A4XoKkBoAYWyIP8oLACV/8Muh1X+rgOlLQjdqzJewJQhPaX+qe/O0A/sj7bfbM` +
-    `LTks968Eg3MncgG6BmCsEz59SbN+vbCBis+qYCBvY/EHAugPSY0wcNTwv/HxoGKGKR` +
-    `54Ba/BcAAP//O8qa8NIHAAA=`)
+    `H4sICI55slwA/1ptbHNaWE11ZEcxd2JBPT0ArJTfauNGFMavNU9xKtggBSNBCVvw4o` +
+    `usY0ouNrs0gUKDKWPpjDJYmhGjUZdYzG0foI/YJylnNFK9jpfSkJvE0mi+8zvf+ZPn` +
+    `sNYlQoUKDbdYwu4ZYiFr/LHSMAzZtan6BpXtnIs/wM1nuPv8AJub24eMsTyHjSp0iS` +
+    `XQjW7JhsFwVSFka60slwqNc3kOf//5F2nd8QadY8OAqnSOtbzY8wrp5Mu+co4x2bTa` +
+    `WEhYFO+eLXYxi+JCN63Brsurg2zpBVJIqap8xzt8f0WvRGPpn9S51L2VNT1Y2WDMUk` +
+    `9JdNBZbbAD+4RQaGVRWeCqhEaXD7JB0MIflTgm1FkjVcXsc4vTddMXFgYWTbcvH7dE` +
+    `yaJJ4pJiZvSTOcb+4MYH8jZAw9vHUXN7SXqe61ZJC61u+5pb7MAfwFdpn6Dkls8swu` +
+    `gGxmwnvwOe6FURPkvOfZBC4kUXgMZokxI++Ri+8q9huQri2b0tN8Hd7Mar3nuZb7VT` +
+    `Fknhb/6wAiVrEo0M2t4oelyAaGy2oXgiiQWXNZZgdcD0mSUfr+8376/SJbzrYg+Rss` +
+    `gxFpFnu16Ar372sRcCDYt+HzlXdJT9aqTF5CiJ1+DsvPIx0guUg5ndoWDZHX79BXmJ` +
+    `JrnY9eKVHhQGuUUwXijU1aOchI9KJL6Dyda17jBJGb36tmZjq2cEdV3XycG8QV1+/u` +
+    `32y8uqBI0L6iTSDAOwhIuJiUXTECzh4mCyT+PDgkVuQbFpHnyvSiVtkk5TNI7GChq+` +
+    `x+R0QtKxHSgf37wsGgZ4uV6OlB7jecnE26lnwnRMmylZP/VqPyrQEP90lTo3DBn98W` +
+    `vprIstV7JIgiPDAKhKcG7OKoglhK14g0fTN+6I4/mTAsaR1Hsq47/00+3tBzo6Kh4d` +
+    `ZMH00U5qke9WNizvdx0obUHoXpXxAib19JT6U9+dIQ/gR/tubrzTbP/bsRk2SM0IoU` +
+    `/OGTfv0jfwLvTmG3oXwL/j3cxOJHPwYN9pzv/DviBFFHkOqAX7JwAA//9BmawjwAcA` +
+    `AA==`)
   if err != nil {
   	panic(err)
   }

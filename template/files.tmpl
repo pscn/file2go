@@ -24,7 +24,7 @@ var container map[string]*file
 
 // Init populates *file with data decoded from base64Encoded string
 func decode(base64Encoded string) (*file, error) {
-  gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
+	gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(BASE64): %s", err)
 	}
@@ -41,7 +41,7 @@ func decode(base64Encoded string) (*file, error) {
 	}
 	defer zr.Close()
 
-  decoded, err := ioutil.ReadAll(zr)
+	decoded, err := ioutil.ReadAll(zr)
 	if err != nil {
 		return nil, fmt.Errorf("failed to decode data(GZIP): %s", err)
 	}
@@ -53,20 +53,20 @@ func decode(base64Encoded string) (*file, error) {
 }
 
 func init() {
-  container = make(map[string]*file)
-  var err error
-  {{ range .Container}}
-  container["{{.Name}}"], err = decode({{range (Chunk .Content 74)}}{{.}}{{end}})
-  if err != nil {
-  	panic(err)
-  }{{ end }}
+	container = make(map[string]*file)
+	var err error
+	{{ range .Container}}
+	container["{{.Name}}"], err = decode({{range (Chunk .Content 74)}}{{.}}{{end}})
+	if err != nil {
+		panic(err)
+	}{{ end }}
 }
 
 func Content(filename string) (*[]byte, error) {
-  if file, ok := container[filename]; ok {
-    return file.content, nil
-  }
-  return nil, fmt.Errorf("file2go %s not found", filename)
+	if file, ok := container[filename]; ok {
+		return file.content, nil
+	}
+	return nil, fmt.Errorf("file2go %s not found", filename)
 }
 
 func ContentMust(filename string) *[]byte {
@@ -78,10 +78,10 @@ func ContentMust(filename string) *[]byte {
 }
 
 func ModTime(filename string) (*time.Time, error) {
-  if file, ok := container[filename]; ok {
-    return file.modTime, nil
-  }
-  return nil, fmt.Errorf("file2go %s not found", filename)
+	if file, ok := container[filename]; ok {
+		return file.modTime, nil
+	}
+	return nil, fmt.Errorf("file2go %s not found", filename)
 }
 
 func ModTimeMust(filename string) *time.Time {
