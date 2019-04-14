@@ -43,32 +43,4 @@ func TestContentMustExist(t *testing.T) {
 	_ = ContentMust("{{.Name}}"){{end}}
 }
 
-func TestModTimeA(t *testing.T) {
-	_, err := ModTime("")
-	if err == nil {
-		t.Fatalf("ModTime: returned no error")
-	}
-}
-func TestModTimeB(t *testing.T) {
-	_, err := ModTime("artist/schema.sql")
-	if err != nil {
-		t.Fatalf("ModTime: %s", err)
-	}
-}
-func TestModTimeMustA(t *testing.T) {
-	defer func() {
-		if r := recover(); r == nil {
-			t.Fatalf("ModTimeMust: should have panic'd")
-		}
-	}()
-	_ = ModTimeMust("nohave")
-	t.Fatalf("ModTimeMust: should have panic'd")
-}
-func TestModTimeMustB(t *testing.T) {
-	defer func() {
-		if r := recover(); r != nil {
-			t.Fatalf("ModTimeMust: should not have panic'd")
-		}
-	}()
-	_ = ModTimeMust("artist/schema.sql")
-}
+// eof
