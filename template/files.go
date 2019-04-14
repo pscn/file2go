@@ -44,32 +44,6 @@ func decode(base64Encoded string) (*[]byte, error) {
 }
 
 func init() {
-<<<<<<< HEAD
-  container = make(map[string]*file)
-  var err error
-  
-  container["template/files.tmpl"], err = decode(`` +
-    `H4sICLq1sFwA/1ptbHNaWE11ZEcxd2JBPT0ArFRRa+Q2EH62fsXUcMEOiw0lXGGPfc` +
-    `htlpKHyx1NoNCwFK09csTakpHlHlmj1/6A/sT+kjKy7Nvb7D005CVZa6Rvvvnmm8lz` +
-    `WOsSoUKFhlssYfcMsZA1/lxpGIbs2lR9g8p2zsUf4OYz3H1+gM3N7UPGWJ7DRhW6xB` +
-    `LoRbdkw2C4qhCytVaWS4XGuTyHf//+h7DueIPOsWFAVTrHWl7seYUU+bKvnGNMNq02` +
-    `FhIWxbtni13MorjQTWuw6/LqIFs6QEopVZXveIfvr+hINJb+SZ1L3VtZ04eVDcYs9S` +
-    `yJHXRWG+zAPiEUWllUFrgqodHlg2wQtPChEseCOmukqph9bnF6bvrCwsCi6fXl45ZY` +
-    `smiCuKScGf1kjrG/uPGJvAzQ8PZxxNxeEp7ndaukhVa3fc0tduAD8FXaJyi55TMXYX` +
-    `QDY7WT3oGe6FURriXnLqSQeNAFoDHapDAwABIyXPPnsFwF9Ozelpsgb3bjYe89zvfg` +
-    `KYuk8C9/WoGSNYkSGbS9UfS5ANHYbEMJRRILLmsswerA05eWfLy+37y/Spfwros9iZ` +
-    `RFjrGIRNv1Anz7s4+9EGhY9OfIc0Wh7HcjLSZHRbyGzs4jH1N6QeVgZnUoWXaHX39D` +
-    `XqJJLna9eKUGhUFuEYwHCo31VE7SRyUSv4PJ1rXuMEkZg8kPM63R7Bmxuq7r5GDeoD` +
-    `G//nH75WVbAsYFeYkwwwgs4WLixKJpDJZwcTDZp/FjwSK3oNw0Ed6tUkmbjEb8Nh0r` +
-    `aPgek9MhSRkAOYIq8gZmAMMAL3fMMdhjPK+aeDsZJ8zItJ+S9VOv9iMEjfIvV6lzw5` +
-    `DRH7+cKPOplABRy5UsEq8LgBsGQFWCc3NxAS8h8oo3eDSG47L4bhClgHE49Z7a+a2C` +
-    `6fn2A4XoKkBoAYWyIP8oLACV/8Muh1X+rgOlLQjdqzJewJQhPaX+qe/O0A/sj7bfbM` +
-    `LTks968Eg3MncgG6BmCsEz59SbN+vbCBis+qYCBvY/EHAugPSY0wcNTwv/HxoGKGKR` +
-    `54Ba/BcAAP//O8qa8NIHAAA=`)
-  if err != nil {
-  	panic(err)
-  }
-=======
 	container = make(map[string]*[]byte)
 	var err error
 	
@@ -93,20 +67,18 @@ func init() {
 		panic(err)
 	}
 	container["template/files_test.tmpl"], err = decode(`` +
-    `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKRSTWsbMR` +
-    `A9r0D/4UVQui5lF3rc4EOJU+ihTg8+BoK6mt2IrCUjaU3Lomt/QH9if0mRYmKntvtB` +
-    `bmL05s17b6aucWUVoSdDTgZS+PINotMDvestpql67/pxTSb4GMUlFjdY3qxwvfi4qj` +
-    `jjrK6xIh+06dFZB23aYVSkkAh8w9k0OWl6QnVlTZDakIuxrvHz+4/EvZRrijGhyKj0` +
-    `2Mj2QfaU/j4/9KnCmV5vrAsoOStEeJwlOJulr240bZ6f2MmEhSW/tOH6q/ahDHizg1` +
-    `erGSbOiru3IOfQzLHDl0LMOCt0l+vzOYweMrII1QcZ5NCVYgdt4CiMzpCCsQluXe6N` +
-    `nMVTUrIGfywC2EqXx2WOU/nslR4IfUrrUPHFnxTjdt90K2BsQGdHoxq88iLzZ/1P2Z` +
-    `+08Wn0f0tVUUcOqbF8LCR1OWVHrd2SK2eXeJ7usdg0p4G/t+OgcC+3hI00un2tst2U` +
-    `chHL9Lzbh5J6dhv8P76zTl9o8eLfLaZtnLV57ih+t35wE8+3WNcg23H2KwAA//8qp6` +
-    `S53QMAAA==`)
+    `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
+    `SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
+    `y8T33POdc5sGF1YxBjbsZGCFT18gej3ym8Finuu3bpg2bIKPUZxjeYXV1RqXy/frmq` +
+    `hpsGYftBnQWwdtunFSrJDkvqV5dtIMjPrCmiC1YRdj0+D7129p8UpuOEaaZzYqRtrK` +
+    `7k4OnF4+3g0xEunN1rqAkgoR7l0EVUT9ZLpsm7ayCUvLfmXD5WftQxnwaj9bryvMVN` +
+    `y8BjuHdoH9eClERYXu8+/FAkaPaa4I9TsZ5NiXYj/YwnGYnGEFY9O0dUkZKR4zZHN/` +
+    `5A7spMtGWf5UHw+EB4AP5RyQnv2BFNePkmsBYwN6OxnV4oUXeXvi/ln0E/gfJv+XGh` +
+    `X37JB0Zf5OWLlVx53dsSurc/xS5zFlMmnhb+00KtzKHWMrje5eqpSyiFTEsqLi5rGI` +
+    `JLi/1n/tOpHvWcHO/jlYKv9EuBPn/z3wwfUPTtY0YNvTjwAAAP//DZuQ9K8DAAA=`)
 	if err != nil {
 		panic(err)
 	}
->>>>>>> devel
 }
 
 // Content for the given filename
