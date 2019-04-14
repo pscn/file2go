@@ -6,7 +6,6 @@ import (
 	"math"
 	"strings"
 	"text/template"
-	"time"
 )
 
 // File keeping the name & the content
@@ -40,12 +39,10 @@ func Parse(tmplName string, container *[]File, arguments, pkg string, devel bool
 		Arguments string
 		Pkg       string
 		Container []File
-		Date      string
 	}{
 		Arguments: arguments,
 		Pkg:       pkg,
 		Container: *container,
-		Date:      time.Now().String(),
 	}
 	tmplStr := ""
 	if devel {
