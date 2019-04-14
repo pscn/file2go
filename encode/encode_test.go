@@ -26,3 +26,29 @@ func TestEncode(t *testing.T) {
 		}
 	}
 }
+
+func TestEncodeFile(t *testing.T) {
+	for _, m := range []struct {
+		filename string
+	}{
+		{"../template/files.tmpl"}, {"../template/files_test.tmpl"},
+	} {
+		_, err := File(m.filename)
+		if err != nil {
+			t.Fatalf("failed to encode file: %s; error=%s", m.filename, err)
+		}
+	}
+}
+
+func TestEncodeFileNotFound(t *testing.T) {
+	for _, m := range []struct {
+		filename string
+	}{
+		{"nohave"}, {"nohave²"},
+	} {
+		_, err := File(m.filename)
+		if err == nil {
+			t.Fatalf("should have failed to encode none existing file")
+		}
+	}
+}
