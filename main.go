@@ -72,7 +72,7 @@ func main() {
 
 	container := make([]template.File, len(files))
 	for i, filename := range files {
-		container[i] = template.File{Name: filename}
+		container[i] = template.File{Name: filepath.ToSlash(filename)}
 		content, err := encode.File(filename)
 		if err != nil {
 			log.Fatalf("failed to encode file: filename=%s, error=%s", filename, err)
