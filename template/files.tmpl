@@ -10,46 +10,43 @@ import (
 	"compress/gzip"
 	"encoding/base64"
 	"fmt"
+	"log"
 	"io/ioutil"
 )
 
 var container map[string]*[]byte
 
 // decode the base64Encoded string and return a *[]byte for the decoded data
-func decode(base64Encoded string) (*[]byte, error) {
+func decode(base64Encoded string) *[]byte {
 	gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode data(BASE64): %s", err)
+		log.Panicf("failed to decode data(BASE64): %s", err)
 	}
 
 	var buf bytes.Buffer
 	_, err = buf.Write(gzipEncoded)
 	if err != nil {
-		return nil, fmt.Errorf("failed buffer decode data: %s", err)
+		log.Panicf("failed buffer decode data: %s", err)
 	}
 
 	zr, err := gzip.NewReader(&buf)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create reader from buffer: %s", err)
+		log.Panicf("failed to create reader from buffer: %s", err)
 	}
 	defer zr.Close()
 
 	decoded, err := ioutil.ReadAll(zr)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode data(GZIP): %s", err)
+		log.Panicf("failed to decode data(GZIP): %s", err)
 	}
 
-	return &decoded, nil
+	return &decoded
 }
 
 func init() {
 	container = make(map[string]*[]byte)
-	var err error
 	{{ range .Container}}
-	container["{{.Name}}"], err = decode({{range (Chunk .Content 74)}}{{.}}{{end}})
-	if err != nil {
-		panic(err)
-	}{{ end }}
+	container["{{.Name}}"] = decode({{range (Chunk .Content 74)}}{{.}}{{end}}){{ end }}
 }
 
 // Content for the given filename
@@ -64,7 +61,7 @@ func Content(filename string) (*[]byte, error) {
 func ContentMust(filename string) *[]byte {
 	content, err := Content(filename)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 	return content
 }

@@ -11,62 +11,59 @@ import (
 	"compress/gzip"
 	"encoding/base64"
 	"fmt"
+	"log"
 	"io/ioutil"
 )
 
 var container map[string]*[]byte
 
 // decode the base64Encoded string and return a *[]byte for the decoded data
-func decode(base64Encoded string) (*[]byte, error) {
+func decode(base64Encoded string) *[]byte {
 	gzipEncoded, err := base64.StdEncoding.DecodeString(base64Encoded)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode data(BASE64): %s", err)
+		log.Panicf("failed to decode data(BASE64): %s", err)
 	}
 
 	var buf bytes.Buffer
 	_, err = buf.Write(gzipEncoded)
 	if err != nil {
-		return nil, fmt.Errorf("failed buffer decode data: %s", err)
+		log.Panicf("failed buffer decode data: %s", err)
 	}
 
 	zr, err := gzip.NewReader(&buf)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create reader from buffer: %s", err)
+		log.Panicf("failed to create reader from buffer: %s", err)
 	}
 	defer zr.Close()
 
 	decoded, err := ioutil.ReadAll(zr)
 	if err != nil {
-		return nil, fmt.Errorf("failed to decode data(GZIP): %s", err)
+		log.Panicf("failed to decode data(GZIP): %s", err)
 	}
 
-	return &decoded, nil
+	return &decoded
 }
 
 func init() {
 	container = make(map[string]*[]byte)
-	var err error
 	
-	container["template/files.tmpl"], err = decode(`` +
-    `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0ArFTRatw6EH22vm` +
-    `KuIUG+LDZcQi4k7EOyWUoemoQmUGhYinY1csTa0iLLKVmj135AP7FfUiTLm91s0kLo` +
-    `iw0jzdE5M2emKGCiOUKJCg2zyGH+BKmQFf5Xaui6/MyUbY3KNs6lp3BxDVfXdzC9uL` +
-    `zLCSkKmKqF5sjBZzQnpOsMUyVCPtHKMqnQOFcU8PP7D491xWp0jnQdKu4cWbHFkpXo` +
-    `T26WpXOEyHqljQVKknT+ZLFJSZIudL0y2DRFuZYrH0D/pFRlMWcNHh/5kKit/0ldSN` +
-    `1aWaUkI+SRGVgMNKBmq/vGGqnK2b/3M48e+HP0/ME+IPRwg6D+LjDFwaBtjQIGMRGE` +
-    `NiGjT+bAmWVEtGoRI/Q1qAxozB8BGqNNBh1JvKh4L4ThZByJ5LeWT6PU/CLg3gagXf` +
-    `SMJFKEzH/GoGTlQZPIWMlqBKK2+dS/J2gqmKyQg9WDbs+cnp/dTo+PshM4aNJAIiOJ` +
-    `IyTxBZy3AkIr8vNWCDQk+drzHPuj/LORFumWiPfQmQfkbUp7VNZmUx3/WH6F3z4h42` +
-    `jo4bwV76zBwiCzCCYAgTC6jlRePJ9w9PzWJp9UukGaER/a7Vnvu9yTOqsqujZ/oS8f` +
-    `vlze7HclYhxuGChZEUd6/0klLQ3Genb+GGq2RLo/AFnfYs8xGJIkXQf787uFdZ9upj` +
-    `idDT6Inh9Gn04eWrXsEVBZ+P8oc67rcv8Jc/9qZVZMyQWNKrsOUHFwzusKG6qHGuau` +
-    `lI+owspRrMZeebxDh+hvp06KsBlQ2RHope/fs8QBYHbqj7a6tsnwBfe2eLObcXseNK` +
-    `C0Z90qno42fLNdVR/b5i1lIwhlaUCKTewZcke3R9nXPiys6IfAPhr2Zb3+3BXyohBR` +
-    `BmpBfgUAAP//AGBoyEYGAAA=`)
-	if err != nil {
-		panic(err)
-	}
-	container["template/files_test.tmpl"], err = decode(`` +
+	container["template/files.tmpl"] = decode(`` +
+    `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFTRattKEH3Wfs` +
+    `VcQYJ0MRJcQi4k+CFxzCUPNwlNoNBgytqaVRZLu2a1SonFvvYD+on9kjKrlWLHbWn7` +
+    `YsOszplzzs5snsNMFwglKjTcYgHLF4iFrPCfUkPXZRembGtUtnEuPoerW7i5fYD51f` +
+    `VDxliew1ytdIEFEKI5Y11nuCoRsplWlkuFxrk8h6+fvxDXDa/ROdZ1qArn2Iav1rxE` +
+    `Orlbl84xJuuNNhYSFsXLF4tNzKJ4peuNwabJy63cUAGppVRlvuQNnp5QSdSW/ipd0p` +
+    `/UudStlVXMUsaeuYHVoAZqvnlsrJGqXPz9uKAm3kaBZAPsE0LPOvjqvwWuCjBoW6OA` +
+    `QwCC0MYjenABBbeciVatQiX5HlU6wjsWkaVwPAE0Bs6moX92b4t5MJpdebp7j98nTV` +
+    `kkhUf+NQUlKyKNKl1md1zJlUhiwWWFBVg9WCSRyeXF/fz0JD2Doyb2jVMWOcYiymrZ` +
+    `CvDhZ5etEGhY9LHXNqWj7L2RFpMd4b8qYenZdmUctN+aMQVqkN3gp3fICzTJ8bIVv+` +
+    `F1ZZBbBOPBIIyuQ/s3LaMCSdPWZLNKN5ikjEr799GPUkZCLqoq2Zo/zPy/D9d3h4mH` +
+    `oToOXZlj/QRJJW2SEvXr7E6h5mtMDkc4ZVHXweHm7YAf43H/4gVMhwkd9jWZPbVq3Y` +
+    `NRWfj3JHWu6zL68cuadh2gKsA5kuhfjf7LYQlK+YzKPwOK19ibCN8kQ3VcgSQI90lo` +
+    `431K4dcUlZ2AXlPyr+IHgsU5HVHeIbcRoWTlLzTUlawmIGqbzYmf7iS8aEcNKE2qW1` +
+    `XEk1Fvuu/q/7b5kbMJbOiaG5BirL1S7vkmlkPvO+s/qg+j9javn09aMk7xfhjBCmrB` +
+    `vgUAAP//qDG+Kt4FAAA=`)
+	container["template/files_test.tmpl"] = decode(`` +
     `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
     `SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
     `y8T33POdc5sGF1YxBjbsZGCFT18gej3ym8Finuu3bpg2bIKPUZxjeYXV1RqXy/frmq` +
@@ -76,9 +73,6 @@ func init() {
     `5A7spMtGWf5UHw+EB4AP5RyQnv2BFNePkmsBYwN6OxnV4oUXeXvi/ln0E/gfJv+XGh` +
     `X37JB0Zf5OWLlVx53dsSurc/xS5zFlMmnhb+00KtzKHWMrje5eqpSyiFTEsqLi5rGI` +
     `JLi/1n/tOpHvWcHO/jlYKv9EuBPn/z3wwfUPTtY0YNvTjwAAAP//DZuQ9K8DAAA=`)
-	if err != nil {
-		panic(err)
-	}
 }
 
 // Content for the given filename
@@ -93,7 +87,7 @@ func Content(filename string) (*[]byte, error) {
 func ContentMust(filename string) *[]byte {
 	content, err := Content(filename)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 	return content
 }
