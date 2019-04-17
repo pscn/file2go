@@ -11,8 +11,8 @@ import (
 	"compress/gzip"
 	"encoding/base64"
 	"fmt"
-	"log"
 	"io/ioutil"
+	"log"
 )
 
 var container map[string]*[]byte
@@ -50,19 +50,19 @@ func init() {
 	container["template/files.tmpl"] = decode(`` +
     `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFTRattKEH3Wfs` +
     `VcQYJ0MRJcQi4k+CFxzCUPNwlNoNBgytqaVRZLu2a1SonFvvYD+on9kjKrlWLHbWn7` +
-    `YsOszplzzs5snsNMFwglKjTcYgHLF4iFrPCfUkPXZRembGtUtnEuPoerW7i5fYD51f` +
-    `VDxliew1ytdIEFEKI5Y11nuCoRsplWlkuFxrk8h6+fvxDXDa/ROdZ1qArn2Iav1rxE` +
-    `Orlbl84xJuuNNhYSFsXLF4tNzKJ4peuNwabJy63cUAGppVRlvuQNnp5QSdSW/ipd0p` +
-    `/UudStlVXMUsaeuYHVoAZqvnlsrJGqXPz9uKAm3kaBZAPsE0LPOvjqvwWuCjBoW6OA` +
-    `QwCC0MYjenABBbeciVatQiX5HlU6wjsWkaVwPAE0Bs6moX92b4t5MJpdebp7j98nTV` +
-    `kkhUf+NQUlKyKNKl1md1zJlUhiwWWFBVg9WCSRyeXF/fz0JD2Doyb2jVMWOcYiymrZ` +
-    `CvDhZ5etEGhY9LHXNqWj7L2RFpMd4b8qYenZdmUctN+aMQVqkN3gp3fICzTJ8bIVv+` +
-    `F1ZZBbBOPBIIyuQ/s3LaMCSdPWZLNKN5ikjEr799GPUkZCLqoq2Zo/zPy/D9d3h4mH` +
-    `oToOXZlj/QRJJW2SEvXr7E6h5mtMDkc4ZVHXweHm7YAf43H/4gVMhwkd9jWZPbVq3Y` +
-    `NRWfj3JHWu6zL68cuadh2gKsA5kuhfjf7LYQlK+YzKPwOK19ibCN8kQ3VcgSQI90lo` +
-    `431K4dcUlZ2AXlPyr+IHgsU5HVHeIbcRoWTlLzTUlawmIGqbzYmf7iS8aEcNKE2qW1` +
-    `XEk1Fvuu/q/7b5kbMJbOiaG5BirL1S7vkmlkPvO+s/qg+j9javn09aMk7xfhjBCmrB` +
-    `vgUAAP//qDG+Kt4FAAA=`)
+    `kuBZnTPnnJ3ZPIeZLhBKVGi4xQKWLxALWeE/pYauyy5M2daobONcfA5Xt3Bz+wDzq+` +
+    `uHjLE8h7la6QILIERzxrrOcFUiZDOtLJcKjXN5Dl8/fyGuG16jc6zrUBXOsQ1frXmJ` +
+    `dHK3Lp1jTNYbbSwkLIqXLxabmEXxStcbg02Tl1u5oQJSS6nKfMkbPD2hkqgt/ZM6l7` +
+    `q1sqIflS5jljL2zA2sBjVQ881jY41U5eLvxwU18TYKJBtgnxB61sFX/y1wVYBB2xoF` +
+    `HAIQhDYe0YMLKLjlTLRqFSrJ96jSEd6xiCyF4wmgMXA2Df2ze1vMg9HsytPde/w+ac` +
+    `oiKTzyrykoWRFpVOkyu+NKrkQSCy4rLMDqwSKJTC4v7uenJ+kZHDWxb5yyyDEWUVbL` +
+    `VoAPP7tshUDDoo+9tikdZe+NtJjsCP9VCUvPtivjoP3WjClQg+wGP71DXqBJjpet+A` +
+    `2vK4PcIhgPBmF0Hdq/aRkVSJq2JptVusEkZVTav49+ojISclFVydb8Yeb/fbi+O0w8` +
+    `DNVx6Moc6ydIKmmTlKhfZ3cKNV9jcjjCKYu6Dg43bwf8GI/7Fy9gOkzosK/J7KlV6x` +
+    `6MysK/J6lzXZfRH7+sadcBqgKcI4n+1ei/HJaglM+o/DOgeI29ifBNMlTHFUiCcJ+E` +
+    `Nt6nFH5NUdkJ6DUl/yp+IFic0xHlHXIbEUpW/kJDXclqAqK22Zz46U7Ci3bUgNKkul` +
+    `VFPBn1pvuu/m+bHzmbwIauuQEpxtor5Z5vYjn0vrP+o/owam/z+vmkJeMU74cRrKAW` +
+    `7FsAAAD//00Y+sjeBQAA`)
 	container["template/files_test.tmpl"] = decode(`` +
     `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
     `SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
