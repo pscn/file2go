@@ -46,33 +46,33 @@ func decode(base64Encoded string) *[]byte {
 
 func init() {
 	container = make(map[string]*[]byte)
-	
+
 	container["template/files.tmpl"] = decode(`` +
-    `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFTRattKEH3Wfs` +
-    `VcQYJ0MRJcQi4k+CFxzCUPNwlNoNBgytqaVRZLu2a1SonFvvYD+on9kjKrlWLHbWn7` +
-    `kuBZnTPnnJ3ZPIeZLhBKVGi4xQKWLxALWeE/pYauyy5M2daobONcfA5Xt3Bz+wDzq+` +
-    `uHjLE8h7la6QILIERzxrrOcFUiZDOtLJcKjXN5Dl8/fyGuG16jc6zrUBXOsQ1frXmJ` +
-    `dHK3Lp1jTNYbbSwkLIqXLxabmEXxStcbg02Tl1u5oQJSS6nKfMkbPD2hkqgt/ZM6l7` +
-    `q1sqIflS5jljL2zA2sBjVQ881jY41U5eLvxwU18TYKJBtgnxB61sFX/y1wVYBB2xoF` +
-    `HAIQhDYe0YMLKLjlTLRqFSrJ96jSEd6xiCyF4wmgMXA2Df2ze1vMg9HsytPde/w+ac` +
-    `oiKTzyrykoWRFpVOkyu+NKrkQSCy4rLMDqwSKJTC4v7uenJ+kZHDWxb5yyyDEWUVbL` +
-    `VoAPP7tshUDDoo+9tikdZe+NtJjsCP9VCUvPtivjoP3WjClQg+wGP71DXqBJjpet+A` +
-    `2vK4PcIhgPBmF0Hdq/aRkVSJq2JptVusEkZVTav49+ojISclFVydb8Yeb/fbi+O0w8` +
-    `DNVx6Moc6ydIKmmTlKhfZ3cKNV9jcjjCKYu6Dg43bwf8GI/7Fy9gOkzosK/J7KlV6x` +
-    `6MysK/J6lzXZfRH7+sadcBqgKcI4n+1ei/HJaglM+o/DOgeI29ifBNMlTHFUiCcJ+E` +
-    `Nt6nFH5NUdkJ6DUl/yp+IFic0xHlHXIbEUpW/kJDXclqAqK22Zz46U7Ci3bUgNKkul` +
-    `VFPBn1pvuu/m+bHzmbwIauuQEpxtor5Z5vYjn0vrP+o/owam/z+vmkJeMU74cRrKAW` +
-    `7FsAAAD//00Y+sjeBQAA`)
+		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFTRattKEH3Wfs` +
+		`VcQYJ0MRJcQi4k+CFxzCUPNwlNoNBgytqaVRZLu2a1SonFvvYD+on9kjKrlWLHbWn7` +
+		`kuBZnTPnnJ3ZPIeZLhBKVGi4xQKWLxALWeE/pYauyy5M2daobONcfA5Xt3Bz+wDzq+` +
+		`uHjLE8h7la6QILIERzxrrOcFUiZDOtLJcKjXN5Dl8/fyGuG16jc6zrUBXOsQ1frXmJ` +
+		`dHK3Lp1jTNYbbSwkLIqXLxabmEXxStcbg02Tl1u5oQJSS6nKfMkbPD2hkqgt/ZM6l7` +
+		`q1sqIflS5jljL2zA2sBjVQ881jY41U5eLvxwU18TYKJBtgnxB61sFX/y1wVYBB2xoF` +
+		`HAIQhDYe0YMLKLjlTLRqFSrJ96jSEd6xiCyF4wmgMXA2Df2ze1vMg9HsytPde/w+ac` +
+		`oiKTzyrykoWRFpVOkyu+NKrkQSCy4rLMDqwSKJTC4v7uenJ+kZHDWxb5yyyDEWUVbL` +
+		`VoAPP7tshUDDoo+9tikdZe+NtJjsCP9VCUvPtivjoP3WjClQg+wGP71DXqBJjpet+A` +
+		`2vK4PcIhgPBmF0Hdq/aRkVSJq2JptVusEkZVTav49+ojISclFVydb8Yeb/fbi+O0w8` +
+		`DNVx6Moc6ydIKmmTlKhfZ3cKNV9jcjjCKYu6Dg43bwf8GI/7Fy9gOkzosK/J7KlV6x` +
+		`6MysK/J6lzXZfRH7+sadcBqgKcI4n+1ei/HJaglM+o/DOgeI29ifBNMlTHFUiCcJ+E` +
+		`Nt6nFH5NUdkJ6DUl/yp+IFic0xHlHXIbEUpW/kJDXclqAqK22Zz46U7Ci3bUgNKkul` +
+		`VFPBn1pvuu/m+bHzmbwIauuQEpxtor5Z5vYjn0vrP+o/owam/z+vmkJeMU74cRrKAW` +
+		`7FsAAAD//00Y+sjeBQAA`)
 	container["template/files_test.tmpl"] = decode(`` +
-    `H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
-    `SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
-    `y8T33POdc5sGF1YxBjbsZGCFT18gej3ym8Finuu3bpg2bIKPUZxjeYXV1RqXy/frmq` +
-    `hpsGYftBnQWwdtunFSrJDkvqV5dtIMjPrCmiC1YRdj0+D7129p8UpuOEaaZzYqRtrK` +
-    `7k4OnF4+3g0xEunN1rqAkgoR7l0EVUT9ZLpsm7ayCUvLfmXD5WftQxnwaj9bryvMVN` +
-    `y8BjuHdoH9eClERYXu8+/FAkaPaa4I9TsZ5NiXYj/YwnGYnGEFY9O0dUkZKR4zZHN/` +
-    `5A7spMtGWf5UHw+EB4AP5RyQnv2BFNePkmsBYwN6OxnV4oUXeXvi/ln0E/gfJv+XGh` +
-    `X37JB0Zf5OWLlVx53dsSurc/xS5zFlMmnhb+00KtzKHWMrje5eqpSyiFTEsqLi5rGI` +
-    `JLi/1n/tOpHvWcHO/jlYKv9EuBPn/z3wwfUPTtY0YNvTjwAAAP//DZuQ9K8DAAA=`)
+		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
+		`SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
+		`y8T33POdc5sGF1YxBjbsZGCFT18gej3ym8Finuu3bpg2bIKPUZxjeYXV1RqXy/frmq` +
+		`hpsGYftBnQWwdtunFSrJDkvqV5dtIMjPrCmiC1YRdj0+D7129p8UpuOEaaZzYqRtrK` +
+		`7k4OnF4+3g0xEunN1rqAkgoR7l0EVUT9ZLpsm7ayCUvLfmXD5WftQxnwaj9bryvMVN` +
+		`y8BjuHdoH9eClERYXu8+/FAkaPaa4I9TsZ5NiXYj/YwnGYnGEFY9O0dUkZKR4zZHN/` +
+		`5A7spMtGWf5UHw+EB4AP5RyQnv2BFNePkmsBYwN6OxnV4oUXeXvi/ln0E/gfJv+XGh` +
+		`X37JB0Zf5OWLlVx53dsSurc/xS5zFlMmnhb+00KtzKHWMrje5eqpSyiFTEsqLi5rGI` +
+		`JLi/1n/tOpHvWcHO/jlYKv9EuBPn/z3wwfUPTtY0YNvTjwAAAP//DZuQ9K8DAAA=`)
 }
 
 // Content for the given filename
