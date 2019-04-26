@@ -17,7 +17,8 @@ func TestContentDoesNotExist(t *testing.T) {
 }
 
 func TestContentExists(t *testing.T) {
-  var err error{{range .Container}}
+	var err error
+{{range .Container}}
 	_, err = Content("{{.Name}}")
 	if err != nil {
 		t.Fatalf("Content \"{{.Name}}\" not found: %s", err)

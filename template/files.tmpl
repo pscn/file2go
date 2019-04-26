@@ -45,7 +45,7 @@ func decode(base64Encoded string) *[]byte {
 
 func init() {
 	container = make(map[string]*[]byte)
-	{{ range .Container}}
+{{ range .Container}}
 	container["{{.Name}}"] = decode({{range (Chunk .Content 74)}}{{.}}{{end}}){{ end }}
 }
 
