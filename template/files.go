@@ -16,6 +16,7 @@ import (
 )
 
 var container map[string]*[]byte
+var filenames []string
 
 // decode the base64Encoded string and return a *[]byte for the decoded data
 func decode(base64Encoded string) *[]byte {
@@ -48,21 +49,23 @@ func init() {
 	container = make(map[string]*[]byte)
 
 	container["template/files.tmpl"] = decode(`` +
-		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFTRattKEH3Wfs` +
-		`VcQYJ0MRJcQi4k+CFxzCUPNwlNoNBgytqaVRZLu2a1SonFvvYD+on9kjKrlWLHbWn7` +
-		`kuBZnTPnnJ3ZPIeZLhBKVGi4xQKWLxALWeE/pYauyy5M2daobONcfA5Xt3Bz+wDzq+` +
-		`uHjLE8h7la6QILIERzxrrOcFUiZDOtLJcKjXN5Dl8/fyGuG16jc6zrUBXOsQ1frXmJ` +
-		`dHK3Lp1jTNYbbSwkLIqXLxabmEXxStcbg02Tl1u5oQJSS6nKfMkbPD2hkqgt/ZM6l7` +
-		`q1sqIflS5jljL2zA2sBjVQ881jY41U5eLvxwU18TYKJBtgnxB61sFX/y1wVYBB2xoF` +
-		`HAIQhDYe0YMLKLjlTLRqFSrJ96jSEd6xiCyF4wmgMXA2Df2ze1vMg9HsytPde/w+ac` +
-		`oiKTzyrykoWRFpVOkyu+NKrkQSCy4rLMDqwSKJTC4v7uenJ+kZHDWxb5yyyDEWUVbL` +
-		`VoAPP7tshUDDoo+9tikdZe+NtJjsCP9VCUvPtivjoP3WjClQg+wGP71DXqBJjpet+A` +
-		`2vK4PcIhgPBmF0Hdq/aRkVSJq2JptVusEkZVTav49+ojISclFVydb8Yeb/fbi+O0w8` +
-		`DNVx6Moc6ydIKmmTlKhfZ3cKNV9jcjjCKYu6Dg43bwf8GI/7Fy9gOkzosK/J7KlV6x` +
-		`6MysK/J6lzXZfRH7+sadcBqgKcI4n+1ei/HJaglM+o/DOgeI29ifBNMlTHFUiCcJ+E` +
-		`Nt6nFH5NUdkJ6DUl/yp+IFic0xHlHXIbEUpW/kJDXclqAqK22Zz46U7Ci3bUgNKkul` +
-		`VFPBn1pvuu/m+bHzmbwIauuQEpxtor5Z5vYjn0vrP+o/owam/z+vmkJeMU74cRrKAW` +
-		`7FsAAAD//00Y+sjeBQAA`)
+		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFVfi+M2EH+2Ps` +
+		`XUcIfcC3YpyxVy5GEvm5Z76N7SPSg0hKLEI5+ILQVZvpIYv/YD9CP2k5SRZSW5tKW9` +
+		`l1080szvj+fnFAUsTYlQoUYrHJawPUIqVY3fVgb6Pr+3Vdegdu0wpG/g4T08vv8Aq4` +
+		`d3H3LGigJWemdKLIE62jnreyt0hZAvjXZCabTDUBTw5+9/0KxH0eAwsL5HXQ4DO4jd` +
+		`XlRIJ0/7ahgYU83BWAecJen26LBNWZLuTHOw2LZFdVIHKiBBKl0VW9Hi6zsqycbRP2` +
+		`UKZTqnanqoTZWyjLFPwsJuYgONOKxbZ5WuNl+vNwTiLxB9LRpsYb0Zj726EkkduI8I` +
+		`I9gkd7wDQpdg0XVWg4AwD6SxvmNsLqEUTjDZ6V2o8L8blcX2niWkNBzPAK2F+SLg58` +
+		`+uXAX9+YMf9+z7r4dmLFHSd361AK1qGprUpsqfhFY7yVMpVI0lODNJJJL87f3z6vVd` +
+		`NocXbeqBM5YMjCXk0LaT4N9J/raTEi1Lfh25Lego/9kqh/yC+H+lsPXTLmncwJ9sdI` +
+		`EA8kf87ScUJVr+ctvJ/6F1Z1E4BOubQVrTBPjPIJMSidPJ5svatMgzRqXr9zEuWk5E` +
+		`7uuan+wXev7DL++ebh0PS/UyoLKBjRuktHI8o9HnlV5AI/bIbzc7Y30Pt3m86F2nMZ` +
+		`XpBhbTgk4p5suPnd6PzagdfHeXDUPf5/THRzjre0BdAmU3OWdoHihNWZpBjZpH1Iys` +
+		`okvfsITCsscjPY2YZ13kX5y5VsRvj0eWJOrVK3Jp8BGduE2pq9Qn1DHPo2vhDp+qMX` +
+		`M8OOWtN9Ybq6TngNrNwOyJ2NmuacDmDR0RwfCiYodWtd+gUNeqnoFsXL6i+bQE4cv6` +
+		`ogVtiHWny3QW+WbXqn7s2n9SNoMD7VULSsbaeeSVbppyq/3iexPZh93+3K9/X20eY3` +
+		`NtRpDyfVyL8bj1YsaKkf7B/3hA64zFwDw28Sx+kQk1IMS1CBhoJPsrAAD//3NJAxTK` +
+		`BgAA`)
 	container["template/files_test.tmpl"] = decode(`` +
 		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
 		`SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
@@ -70,9 +73,16 @@ func init() {
 		`hpsGYftBnQWwdtunFSrJDkvqV5dtIMjPrCmiC1YRdj0+D7129p8UpuOEaaZzYqRtrK` +
 		`7k4OnF4+3g0xEunN1rqAkgoR7l0EVUT9ZLpsm7ayCUvLfmXD5WftQxnwaj9bryvMVN` +
 		`y8BjuHdoH9eClERYXu8+/FAkaPaa4I9TsZ5NiXYj/YwnGYnGEFY9O0dUkZKR4zZHN/` +
-		`5A7spMtGWf5UHw+EB4AP5RyQnv2BFNePkmsBYwN6OxnV4oUXeXvi/ln0E/gfJv+XGh` +
-		`X37JB0Zf5OWLlVx53dsSurc/xS5zFlMmnhb+00KtzKHWMrje5eqpSyiFTEsqLi5rGI` +
-		`JLi/1n/tOpHvWcHO/jlYKv9EuBPn/z3wwfUPTtY0YNvTjwAAAP//DZuQ9K8DAAA=`)
+		`7L6TLvtk9ZN9PBAeAD6Uc0B69gdSXD9KrgWMDejtZFSLF17k7Yn7Z9FP4H+Y/F9qVN` +
+		`yzQ9KV+Tth5VYdd3bHrqzO8Uudx5TJpIW/tdOocCt3jK00unupUsoiUhHLioqbxyKS` +
+		`4P5a/7XrRL5nBTv752Cp/BPhTpz/98AH1z84WdOAbU8/AgAA///bhE0SrwMAAA==`)
+
+	filenames := make([]string, len(container))
+	i := 0
+	for key := range container {
+		filenames[i] = key
+		i++
+	}
 }
 
 // Content for the given filename
@@ -90,6 +100,11 @@ func ContentMust(filename string) *[]byte {
 		log.Panic(err)
 	}
 	return content
+}
+
+// Filenames returns the names of the files stored
+func Filenames() []string {
+	return filenames
 }
 
 // eof

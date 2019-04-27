@@ -15,6 +15,7 @@ import (
 )
 
 var container map[string]*[]byte
+var filenames []string
 
 // decode the base64Encoded string and return a *[]byte for the decoded data
 func decode(base64Encoded string) *[]byte {
@@ -45,8 +46,15 @@ func decode(base64Encoded string) *[]byte {
 
 func init() {
 	container = make(map[string]*[]byte)
-	{{ range .Container}}
+{{ range .Container}}
 	container["{{.Name}}"] = decode({{range (Chunk .Content 74)}}{{.}}{{end}}){{ end }}
+
+	filenames := make([]string, len(container))
+	i := 0
+	for key := range container {
+		filenames[i] = key
+		i++
+	}
 }
 
 // Content for the given filename
@@ -64,6 +72,11 @@ func ContentMust(filename string) *[]byte {
 		log.Panic(err)
 	}
 	return content
+}
+
+// Filenames returns the names of the files stored
+func Filenames() []string {
+	return filenames
 }
 
 // eof
