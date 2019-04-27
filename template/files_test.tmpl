@@ -44,4 +44,14 @@ func TestContentMustExist(t *testing.T) {
 	_ = ContentMust("{{.Name}}"){{end}}
 }
 
+func TestFilenames(t *testing.T) {
+	filenames := Filenames()
+	i := 0{{range .Container}}
+	if filenames[i] != "{{.Name}}" {
+		t.Fatalf("Filenames: mismatch got '%s' want '%s'",
+			filenames[i], "{{.Name}}")
+	}
+	i++{{end}}
+}
+
 // eof

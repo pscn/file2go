@@ -47,14 +47,8 @@ func decode(base64Encoded string) *[]byte {
 func init() {
 	container = make(map[string]*[]byte)
 {{ range .Container}}
+	filenames = append(filenames, "{{.Name}}")
 	container["{{.Name}}"] = decode({{range (Chunk .Content 74)}}{{.}}{{end}}){{ end }}
-
-	filenames := make([]string, len(container))
-	i := 0
-	for key := range container {
-		filenames[i] = key
-		i++
-	}
 }
 
 // Content for the given filename

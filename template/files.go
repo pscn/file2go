@@ -48,41 +48,37 @@ func decode(base64Encoded string) *[]byte {
 func init() {
 	container = make(map[string]*[]byte)
 
+	filenames = append(filenames, "template/files.tmpl")
 	container["template/files.tmpl"] = decode(`` +
-		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFVfi+M2EH+2Ps` +
-		`XUcIfcC3YpyxVy5GEvm5Z76N7SPSg0hKLEI5+ILQVZvpIYv/YD9CP2k5SRZSW5tKW9` +
-		`l1080szvj+fnFAUsTYlQoUYrHJawPUIqVY3fVgb6Pr+3Vdegdu0wpG/g4T08vv8Aq4` +
-		`d3H3LGigJWemdKLIE62jnreyt0hZAvjXZCabTDUBTw5+9/0KxH0eAwsL5HXQ4DO4jd` +
-		`XlRIJ0/7ahgYU83BWAecJen26LBNWZLuTHOw2LZFdVIHKiBBKl0VW9Hi6zsqycbRP2` +
-		`UKZTqnanqoTZWyjLFPwsJuYgONOKxbZ5WuNl+vNwTiLxB9LRpsYb0Zj726EkkduI8I` +
-		`I9gkd7wDQpdg0XVWg4AwD6SxvmNsLqEUTjDZ6V2o8L8blcX2niWkNBzPAK2F+SLg58` +
-		`+uXAX9+YMf9+z7r4dmLFHSd361AK1qGprUpsqfhFY7yVMpVI0lODNJJJL87f3z6vVd` +
-		`NocXbeqBM5YMjCXk0LaT4N9J/raTEi1Lfh25Lego/9kqh/yC+H+lsPXTLmncwJ9sdI` +
-		`EA8kf87ScUJVr+ctvJ/6F1Z1E4BOubQVrTBPjPIJMSidPJ5svatMgzRqXr9zEuWk5E` +
-		`7uuan+wXev7DL++ebh0PS/UyoLKBjRuktHI8o9HnlV5AI/bIbzc7Y30Pt3m86F2nMZ` +
-		`XpBhbTgk4p5suPnd6PzagdfHeXDUPf5/THRzjre0BdAmU3OWdoHihNWZpBjZpH1Iys` +
-		`okvfsITCsscjPY2YZ13kX5y5VsRvj0eWJOrVK3Jp8BGduE2pq9Qn1DHPo2vhDp+qMX` +
-		`M8OOWtN9Ybq6TngNrNwOyJ2NmuacDmDR0RwfCiYodWtd+gUNeqnoFsXL6i+bQE4cv6` +
-		`ogVtiHWny3QW+WbXqn7s2n9SNoMD7VULSsbaeeSVbppyq/3iexPZh93+3K9/X20eY3` +
-		`NtRpDyfVyL8bj1YsaKkf7B/3hA64zFwDw28Sx+kQk1IMS1CBhoJPsrAAD//3NJAxTK` +
-		`BgAA`)
+		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE11ZEcxd2JBPT0AnFRRi+M2EH62fs` +
+		`XUcIddgg1lucIeedjbTcs9dG/pHhQaQlGikU/ElowsX7kYvfYH9Cf2l5SRFSXZtKXt` +
+		`S4JHmvm+b+Yb1TXcG4HQoEbLHQrYfoFcqha/aQxMU3Vnm7FD7Qbv87fw8AEeP3yE1c` +
+		`P7jxVjdQ0rvTMCBVDGcMumyXLdIFT3RjuuNFrv6xr++O13qvXIO/SeTRNq4T3r+W7P` +
+		`G6STp33jPWOq6411ULAs335xOOQsy3em6y0OQ90cVE8BJEilm3rLB3xzQyHZOfpTpl` +
+		`ZmdKqlj9Y0OSsZ+8wt7I5soOP9enBW6Wbz9XpDIOEC0de8wwHWm/k4qBNI6sB9QpjB` +
+		`jnLnO8C1AItutBo4xHogjQ0Zc7IAwR1nctS7GCn+qlSZ0ieWkdJ4vAC0Fm6XEb96dm` +
+		`IV9VcPodxzyL8sWrJMyZD51RK0aqlo1pqmeuJa7WSRS65aFODMUSKRLN7dPa/e3JS3` +
+		`8GrIA3DJMs9YRh3ajhLCTKp3o5RoWfbLzG1JR9VPVjkszoj/WwrbUO2cxhX8waYuEE` +
+		`D1iL/+iFygLV5vR/kftO4scodgQzJIa7oI/wIyE0icDra6b82ARckodDmP2WgVEblr` +
+		`2+Jg/2fPv//5/dN1x6OpXkdU5tnsIKWVK0oqfbL0Ejq+x+La2SWbJrjeR5ad3L4E3v` +
+		`eoRZFCC8jTpublGc76LL6B5dHMx40v7j+Nej8DoXbw7U3p/TRV9BPWvZwmQC3Ae1IT` +
+		`3p355nFfGvUZddrEWW+8k+ilbSmixtA0Y0NLlAyLjtotwOxpSCfyxwKbt3REo4ktTh` +
+		`latWH2Ma5VuwDZuWpF9Wl88U18NYA2xHrUIl8kvuWlqh/G4e+ULaAnRwygZIqdSl7o` +
+		`pirX2s9eisQ+uvJlv/7ZlEUy/GUzopTvkk3m4yGImSNGho/w7MPgjMXIPCUVZXpLCT` +
+		`UiJJ9FDDSS/RkAAP//KTRvZ4QGAAA=`)
+	filenames = append(filenames, "template/files_test.tmpl")
 	container["template/files_test.tmpl"] = decode(`` +
-		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKSRzW7UMB` +
-		`SF17lPcWoJkSCUSCxTzQJ1isSCKYtZVqpMfJNazdgj2xmBIm95AB6RJ0F2h3ZgOvyo` +
-		`y8T33POdc5sGF1YxBjbsZGCFT18gej3ym8Finuu3bpg2bIKPUZxjeYXV1RqXy/frmq` +
-		`hpsGYftBnQWwdtunFSrJDkvqV5dtIMjPrCmiC1YRdj0+D7129p8UpuOEaaZzYqRtrK` +
-		`7k4OnF4+3g0xEunN1rqAkgoR7l0EVUT9ZLpsm7ayCUvLfmXD5WftQxnwaj9bryvMVN` +
-		`y8BjuHdoH9eClERYXu8+/FAkaPaa4I9TsZ5NiXYj/YwnGYnGEFY9O0dUkZKR4zZHN/` +
-		`7L6TLvtk9ZN9PBAeAD6Uc0B69gdSXD9KrgWMDejtZFSLF17k7Yn7Z9FP4H+Y/F9qVN` +
-		`yzQ9KV+Tth5VYdd3bHrqzO8Uudx5TJpIW/tdOocCt3jK00unupUsoiUhHLioqbxyKS` +
-		`4P5a/7XrRL5nBTv752Cp/BPhTpz/98AH1z84WdOAbU8/AgAA///bhE0SrwMAAA==`)
-
-	filenames := make([]string, len(container))
-	i := 0
-	for key := range container {
-		filenames[i] = key
-		i++
-	}
+		`H4sICAAAAAAA/2RHVnRjR3hoZEdWY1ptbHNaWE5mZEdWemRDNTBiWEJzAKRSvW7bMB` +
+		`Cexae4EAgiN4ZUdFTgoYgToEOdDt6aImDFo0xEIg2SclsIXPsAfcQ+SXGyYyux3B90` +
+		`s8X7fu/yHK6tRKjQoBMBJXz+BlzpGt9UFroue+uqtkETfIz8CuZ3sLhbws383TJjLM` +
+		`9hiT5oU4GyDrQp61aiBIL7gnWdE6ZCyK6tCUIbdDHmOfz8/oOIF6LBGFnXoZExsrUo` +
+		`H0WF9PLhsYqRMd2srQuQsoSHrQpnE8ZUa8pelljRhLlFv7Dh5qv2IQ3wajebLSfQse` +
+		`RhCugcFDPYjaecT1iiVf95NgOja5pLQnYrgqhVyneDBTgMrTMowViato6QkcVjD724` +
+		`P1bfCNfr9OjRPvYOBwb35Qycnv3GKdwfIPccjA2gbGtkAeee9+zk+6noEfvvW/+HGi` +
+		`UqdEC4tP9PtvpWHZZ2gy6dXMGzOo9dkkgBfmXbWsJKbBDWwujyQlLKJLIkphOWPByK` +
+		`IMB2W//EdSLffwU7++tgVP6JcCfW/zLwYPtjK7vVNRrR4Mi1qacn8n+YoyOiL6/HDW` +
+		`gFe+BH/YmyDjy8uLg9awGN9o0I5QoqG+Di3F/AF2G2v/iUihqyTuH5VZPu5eUgX54D` +
+		`WsV+BQAA///VaSc9jwQAAA==`)
 }
 
 // Content for the given filename
